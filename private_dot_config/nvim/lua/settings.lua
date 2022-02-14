@@ -46,10 +46,9 @@ opt.lazyredraw = true
 opt.synmaxcol = 240
 
 -----------------------------------------------------------
--- Colorscheme
+-- True color
 -----------------------------------------------------------
 opt.termguicolors = true
-cmd [[colorscheme monokai]]
 
 -----------------------------------------------------------
 -- Tabs, indent

@@ -36,6 +36,7 @@ cmd [[
 ]]
 
 local packer = require 'packer'
+local monokai = require 'plugins/monokai'
 local nvim_tree = require 'plugins/nvim-tree'
 local nvim_treesitter = require 'plugins/nvim-treesitter'
 local nvim_autopairs = require 'plugins/nvim-autopairs'
@@ -50,6 +51,7 @@ local hop = require 'plugins/hop'
 -- for go test coverage
 local nvim_goc = require 'plugins/nvim-goc'
 
+
 -- Add packages
 return packer.startup(function(use)
   if packer_bootstrap then
@@ -58,8 +60,7 @@ return packer.startup(function(use)
 
   use 'wbthomason/packer.nvim' -- packer can manage itself
 
-  use 'tanvirtin/monokai.nvim'
-
+  use(monokai)
   use(nvim_tree)
   use(nvim_treesitter)
   use(nvim_autopairs)
