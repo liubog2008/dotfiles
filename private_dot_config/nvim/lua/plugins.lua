@@ -59,13 +59,9 @@ local nvim_goc = require 'plugins/nvim-goc'
 
 -- Add packages
 return packer.startup(function(use)
-  if packer_bootstrap then
-    packer.sync()
-  end
-
   use 'wbthomason/packer.nvim' -- packer can manage itself
 
-  use(monokai)
+   use(monokai)
   use(nvim_tree)
   use(nvim_treesitter)
   use(nvim_autopairs)
@@ -79,4 +75,7 @@ return packer.startup(function(use)
   use(hop)
   use(nvim_goc)
 
+  if packer_bootstrap then
+    packer.sync()
+  end
 end)

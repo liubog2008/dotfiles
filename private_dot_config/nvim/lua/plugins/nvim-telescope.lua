@@ -53,7 +53,6 @@ end
 
 local M = {
   'nvim-telescope/telescope.nvim',
-  as = "plugins/nvim-telescope",
   requires = {
     'nvim-lua/plenary.nvim',
     {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'},
