@@ -7,14 +7,12 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- TODO: it should be optimized
-function Reload()
-  for name,_ in pairs(package.loaded) do
-    if name:match('^cnull') then
-      package.loaded[name] = nil
-    end
-  end
+function reload(opts)
+  local pkg = opts.file:match(".*/(plugins/.*).lua")
+  package.loaded[pkg] = nil
 
-  dofile(vim.env.MYVIMRC)
+  require(pkg)
+
   vim.cmd [[PackerCompile]]
 --
 --  for name,_ in pairs(package.loaded) do
@@ -28,12 +26,19 @@ end
 
 -- hello
 cmd [[packadd packer.nvim]]
-cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost ~/.config/nvim/lua/plugins/*.lua lua Reload()
-  augroup end
-]]
+-- cmd [[
+--   augroup packer_user_config
+--     autocmd!
+--     autocmd BufWritePost ~/.config/nvim/lua/plugins/*.lua lua Reload(<afile>)
+--   augroup end
+-- ]]
+
+local aug = vim.api.nvim_create_augroup("packer_user_config", {})
+vim.api.nvim_create_autocmd({"BufWritePost"}, {
+  group = aug,
+  pattern = vim.fn.expand('~') .. '/.config/nvim/lua/plugins/*.lua',
+  callback = reload,
+})
 
 local packer = require 'packer'
 local monokai = require 'plugins/monokai'
@@ -73,4 +78,5 @@ return packer.startup(function(use)
   use(nvim_lint)
   use(hop)
   use(nvim_goc)
+
 end)
